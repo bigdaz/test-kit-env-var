@@ -1,0 +1,3 @@
+rootProject.name = 'env-var-consumer'
+
+println "From settings script: ${System.getenv('ENV_VAR')}"

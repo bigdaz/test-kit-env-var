@@ -1,0 +1,7 @@
+println "From build script: ${System.getenv('ENV_VAR')}"
+
+task printEnvVar {
+    doLast {
+        println "From task: ${System.getenv('ENV_VAR')}"
+    }
+}
