@@ -8,12 +8,13 @@ import org.gradle.testkit.runner.GradleRunner;
 
 class TestKitRunnerTest extends Specification {
 
-    def "execute env-var-consumer"() {
+    def "execute env-var-consumer with Gradle #gradleVersion"() {
         when:
         File projectDir = new File("../env-var-consumer")
 
         // Run the build
         GradleRunner runner = GradleRunner.create()
+            .withGradleVersion(gradleVersion)
             .withProjectDir(projectDir)
             .forwardOutput()
             .withArguments("-I", "init.gradle", "printEnvVar")
@@ -25,5 +26,8 @@ class TestKitRunnerTest extends Specification {
         buildOutput.contains("From settings script: foo!")
         buildOutput.contains("From build script: foo!")
         buildOutput.contains("From task: foo!")
+
+        where:
+        gradleVersion << ["7.5.1", "7.4.2", "6.9.2", "6.7", "5.6.4"]
     }
 }
